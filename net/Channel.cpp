@@ -8,7 +8,7 @@
 #include "Channel.h"
 #include "EventLoop.h"
 
-#include <muduo/base/logging.h>
+#include <muduo/base/Logging.h>
 
 #include <sstream>
 

@@ -66,7 +66,7 @@ public:
 
     void enableReading()
     {
-        events |= kReadEvent;
+        events_ |= kReadEvent;
         update();
     }
 
