@@ -13,8 +13,14 @@
 #include <muduo/base/CurrentThread.h>
 #include <muduo/base/Thread.h>
 
+#include <memory>
+#include <vector>
+
 namespace research
 {
+
+class Channel;
+class Poller;
 
 class EventLoop : noncopyable
 {
@@ -23,6 +29,11 @@ public:
     ~EventLoop();
 
     void loop();
+
+    void quit();
+
+    void updateChannel(Channel* channel);
+
     static EventLoop* getEventLoopOfCurrentThread();
 
     void assertInLoopThread()
@@ -41,8 +52,13 @@ public:
 private:
     void abortNotInLoopThread();
 
+    using ChannelList = std::vector<Channel*>;
+
     bool looping_;
+    bool quit_;
     const pid_t threadId_;
+    std::unique_ptr<Poller> poller_;
+    ChannelList activeChannels_;
 };
 
 }
