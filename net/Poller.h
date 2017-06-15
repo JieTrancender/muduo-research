@@ -9,6 +9,7 @@
 #define _RESEARCH_NET_POLLER_H
 
 #include "EventLoop.h"
+#include "../core/noncopyable.hpp"
 
 #include <muduo/base/Timestamp.h>
 
@@ -31,7 +32,7 @@ public:
     ~Poller();
 
     // must be called in the loop thread.
-    Timestamp poll(int timeoutMs, ChannelList* activeChannels);
+    muduo::Timestamp poll(int timeoutMs, ChannelList* activeChannels);
 
     //must be called in the loop thread.
     void updateChannel(Channel* channel);
